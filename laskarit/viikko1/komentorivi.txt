@@ -21,3 +21,5 @@ kurssit
     └── viikko1
 
 15 directories, 5 files
+
+__ S A B O T A G E __
