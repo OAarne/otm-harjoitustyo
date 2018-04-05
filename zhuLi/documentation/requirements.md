@@ -22,6 +22,7 @@ The app allows tracking of sources and associated notes for multiple research pr
 * Allow adding tags to sources to indicate which project(s) they are associated with
 * sort/show sources by project
 * to-read list
-* Automatic generation of a .bib file from selected set of sources
-* display markdown note files as HTML
+* Automatic generation of BibTex reference from manually added metadata (and vice versa?)
+* Automatic generation of a .bib file from a selected set of sources
+* display markdown note files compiled
 * Allow barebones editing of note files
