@@ -1,7 +1,6 @@
 ## Things left to do for week 4 deadline
 
 ### Necessary
-* Switch to gradle and get ./gradlew run to work
 * Exclude UI code from test report
 * min 20% test coverage
 * Get checkstyle working
@@ -11,3 +10,7 @@
 
 ### Extra Credit
 * Make a way to generate runnable jar
+
+### Done
+* Switch to gradle and get ./gradlew run to work
+* Add jacoco plugin
