@@ -1,4 +1,9 @@
+zhuLi/out
+zhuLi/build
 *.html
 *target
 *.iml
 *.idea
+*.class
+*.jar
+*.gradle
