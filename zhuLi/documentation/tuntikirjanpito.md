@@ -8,3 +8,4 @@
 | 7.4  | 2     |  ^                                                      |
 | 9.4  | 2     |  ^, made it possible to add new sources                 |
 | 10.4 | 4     | Added more fields, added a test, updated readme         |
+| 12.4 | 4     | Migrated to gradle, messed with tests					 |
