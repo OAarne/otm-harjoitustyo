@@ -4,19 +4,24 @@
 The app allows tracking of sources and associated notes for multiple research projects.
 
 ## Features
+
+### Completed
+* Loading sources from JSON file
+* Adding sources, each of which has:
+	* title
+	* date added
+	* publication date
+	* authors
+	* a bibtex reference
+
 ### Core
+* Saving sources to JSON file
 * Adding sources, each of which has:
     * file(s?)
-    * title
-    * date added
-    * publication date
-    * author(s)
     * a markdown file for notes on the source
     * source URL
-    * publisher
     * date of latest edit (note file or metadata)
-    * A bibtex reference
-* Editing source data
+* Editing source data with a form
 
 ### Additional
 * Allow adding tags to sources to indicate which project(s) they are associated with
