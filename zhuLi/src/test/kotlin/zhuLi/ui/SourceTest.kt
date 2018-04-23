@@ -2,7 +2,7 @@ package zhuLi.ui
 
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import zhuLi.ui.models.Source
+import zhuLi.domain.Source
 import java.util.Date
 
 class SourceTest {

@@ -1,4 +1,4 @@
-package zhuLi.ui.models
+package zhuLi.domain
 
 import com.squareup.moshi.Json
 import javafx.beans.property.SimpleIntegerProperty
@@ -42,6 +42,7 @@ class Source(
     var publisher by publisherProperty
 }
 
+// TODO: figure out what the point of this actually is
 class SourceModel : ItemViewModel<Source>() {
     val id = bind(Source::idProperty)
     val title = bind(Source::titleProperty)

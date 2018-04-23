@@ -3,38 +3,77 @@ package zhuLi.ui.views
 import javafx.scene.control.TableView
 import tornadofx.View
 import tornadofx.action
+import tornadofx.bindSelected
 import tornadofx.borderpane
 import tornadofx.bottom
 import tornadofx.button
 import tornadofx.center
+import tornadofx.column
+import tornadofx.hbox
+import tornadofx.makeEditable
 import tornadofx.singleAssign
+import tornadofx.smartResize
+import tornadofx.tableview
+import zhuLi.domain.Source
+import zhuLi.domain.SourceModel
 import zhuLi.ui.controllers.SourceController
-import zhuLi.ui.models.Source
-import zhuLi.ui.models.SourceModel
 import java.util.Date
 
 class MainView : View("Zhu Li - Digital Research Assistant") {
 
     private val controller: SourceController by inject()
-    private val model: SourceModel by inject()
+    private val sourceModel: SourceModel by inject()
     private var sourceTable: TableView<Source> by singleAssign()
 
     override val root = borderpane {
         center {
-            add<SourceTable>()
+            tableview(controller.sources) {
+                sourceTable = this
+//              TODO: date is shown in american format, this is unacceptable
+//              TODO: implement a way to edit authors
+                column("id", Source::idProperty)
+                column("title", Source::titleProperty).makeEditable()
+//        readonlyColumn("authors", Source::authorsProperty)
+                column("pub. date", Source::pubDateProperty)//.makeEditable()
+                column("Date Added", Source::addDateProperty)
+                column("BibTex", Source::bibTexProperty).makeEditable()
+                column("publisher", Source::publisherProperty).makeEditable()
+                bindSelected(sourceModel)
+                isEditable = true
+                prefWidth = 800.0
+                smartResize()
+            }
+
         }
-        bottom { button("Add Source").action(::addSource) }
+        bottom {
+            hbox {
+                button("Add Source").action(::addSource)
+                button("Delete selected source").action(::deleteSource)
+                button("Save").action(::save)
+            }
+        }
     }
+
 
     private fun addSource() {
         val newSource = Source(controller.sources.size + 1, "", Date(), "", "")
         controller.addSource(newSource)
-        sourceTable.selectionModel.select(newSource)
-        sourceTable.edit(sourceTable.items.size - 1, sourceTable.columns.first())
+//        sourceTable.selectionModel.select(newSource)
+        sourceTable.selectionModel.select(sourceTable.items.size - 1, sourceTable.columns[1])
+    }
+
+    private fun deleteSource() {
+        controller.deleteSource(sourceTable.selectionModel.selectedItem)
+    }
+
+    private fun save() {
+        controller.save()
     }
 
     init {
 //        controller = SourceController("sources.json")
         root.setPrefSize(800.0, 600.0)
     }
+
+    // TODO: Make it save on close?
 }

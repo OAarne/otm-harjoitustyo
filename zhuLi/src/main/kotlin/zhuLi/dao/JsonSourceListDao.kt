@@ -5,12 +5,14 @@ import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Rfc3339DateJsonAdapter
 import com.squareup.moshi.Types
-import zhuLi.ui.models.Source
+import zhuLi.domain.Source
 import java.io.File
 import java.util.Date
 
-class SourceDao(val file: File) {
-    //    TODO: Make this all nice with, like, interfaces and things
+class JsonSourceListDao(val file: File) : SourceListDao {
+
+    override val sources: List<Source>
+
     val listType = Types.newParameterizedType(List::class.java, Source::class.java)
 
     val moshiSource = Moshi.Builder()
@@ -28,10 +30,7 @@ class SourceDao(val file: File) {
 
     val listAdapter: JsonAdapter<List<Source>> = moshiList.adapter(listType)
 
-    var sources: List<Source>
-
     init {
-//        test()
         sources = load()
     }
 
@@ -49,17 +48,13 @@ class SourceDao(val file: File) {
         }
     }
 
-    fun load(): List<Source> {
+    override fun load(): List<Source> {
         val jsonList = file.readText()
         val sourceList = listAdapter.fromJson(jsonList)
         return sourceList!!
     }
 
-    fun reload() {
-        sources = load()
-    }
-
-    fun save(sources: List<Source>) {
+    override fun save(sources: List<Source>) {
         var jsonList = listAdapter.toJson(sources)
         file.printWriter().use { out ->
             out.println(jsonList)
