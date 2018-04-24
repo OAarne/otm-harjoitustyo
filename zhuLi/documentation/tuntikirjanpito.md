@@ -13,5 +13,7 @@
 | 15.4 | 5	   | Continued to implement 3-tier structure with JSON		 |
 | 16.3 | 3     | ^														 |
 | 17.3 | 3	   | Got loading from JSON to work, refactored tests		 |
+| 23.3 | 5     | Adding, deleting sources and saving changes             |
+| 24.3 | 8     | Misc. BS trying to get a release together, testing, etc |
 
-__Total hours: 29 __
+__Total hours: 42__

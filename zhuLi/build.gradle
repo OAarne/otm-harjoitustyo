@@ -3,10 +3,11 @@ apply plugin: 'maven'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 apply plugin: 'jacoco'
+apply plugin: 'com.github.johnrengelman.plugin-shadow'
 
-mainClassName = "zhuLi.Main"
+mainClassName = "zhuLi.MainKt"
 group = 'zhuLi'
-version = '1.0-SNAPSHOT'
+version = '0.1'
 
 buildscript {
     ext.kotlin_version = '1.2.31'
@@ -14,11 +15,13 @@ buildscript {
 
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'no.tornado:fxlauncher-gradle-plugin:1.0.15'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.3'
     }
 
 }
@@ -56,14 +59,6 @@ dependencies {
     testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test', version:'1.2.31'
 }
 
-task ktlint(type: JavaExec, group: "verification") {
-	description = "Check Kotlin code style."
-	classpath = configurations.ktlint
-	main = "com.github.shyiko.ktlint.Main"
-	args "src/**/*.kt"
-}
-check.dependsOn ktlint
-
 task ktlintFormat(type: JavaExec, group: "formatting") {
     description = "Fix Kotlin code style deviations."
     classpath = configurations.ktlint
@@ -74,11 +69,24 @@ task ktlintFormat(type: JavaExec, group: "formatting") {
     }
 }
 
+task ktlint(type: JavaExec, group: "verification") {
+	description = "Check Kotlin code style."
+	classpath = configurations.ktlint
+	main = "com.github.shyiko.ktlint.Main"
+	args "src/**/*.kt"
+}
+check.dependsOn ktlint
+
 jacoco {
 	toolVersion = "0.8.0"
 }
 
 jacocoTestReport {
+	afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: '**/ui/**')
+        })
+    }
     reports {
         xml.enabled true
         csv.enabled true
@@ -89,3 +97,11 @@ jacocoTestReport {
 sourceSets {
     test.kotlin.srcDirs += 'src/test'
 }
+
+jar {
+	manifest {
+		attributes 'Main-Class': 'zhuLi.MainKt'
+	}
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+

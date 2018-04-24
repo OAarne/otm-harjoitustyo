@@ -15,14 +15,13 @@ import tornadofx.singleAssign
 import tornadofx.smartResize
 import tornadofx.tableview
 import zhuLi.domain.Source
-import zhuLi.domain.SourceModel
 import zhuLi.ui.controllers.SourceController
 import java.util.Date
 
 class MainView : View("Zhu Li - Digital Research Assistant") {
 
     private val controller: SourceController by inject()
-    private val sourceModel: SourceModel by inject()
+    private val sourceModel: SourceViewModel by inject()
     private var sourceTable: TableView<Source> by singleAssign()
 
     override val root = borderpane {
@@ -43,7 +42,6 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
                 prefWidth = 800.0
                 smartResize()
             }
-
         }
         bottom {
             hbox {
@@ -53,7 +51,6 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
             }
         }
     }
-
 
     private fun addSource() {
         val newSource = Source(controller.sources.size + 1, "", Date(), "", "")
@@ -74,6 +71,5 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
 //        controller = SourceController("sources.json")
         root.setPrefSize(800.0, 600.0)
     }
-
     // TODO: Make it save on close?
 }

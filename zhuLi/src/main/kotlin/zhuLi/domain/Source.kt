@@ -4,7 +4,6 @@ import com.squareup.moshi.Json
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
-import tornadofx.ItemViewModel
 import tornadofx.getValue
 import tornadofx.setValue
 import java.util.Date
@@ -40,14 +39,20 @@ class Source(
 
     val publisherProperty = SimpleStringProperty(publisher)
     var publisher by publisherProperty
-}
 
-// TODO: figure out what the point of this actually is
-class SourceModel : ItemViewModel<Source>() {
-    val id = bind(Source::idProperty)
-    val title = bind(Source::titleProperty)
-    val pubDate = bind(Source::pubDateProperty)
-    val addDate = bind(Source::addDateProperty)
-    val bibTex = bind(Source::bibTexProperty)
-    val publisher = bind(Source::publisherProperty)
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Source
+
+        if (id != other.id) return false
+        if (title != other.title) return false
+        if (pubDate != other.pubDate) return false
+        if (addDate != other.addDate) return false
+        if (bibTex != other.bibTex) return false
+        if (publisher != other.publisher) return false
+
+        return true
+    }
 }

@@ -13,13 +13,15 @@
 
 #### Other stuff
 * Make a way to generate runnable jar and add it to readme
-* min 20% test coverage
-* Exclude UI code from test report
 * Keep the hours logged
-* Make a sequence diagram of a central part of the program's functionality (making and saving a change?)
-* Clean up the readme and add a more detailed user's manual
+* Add a more detailed user's manual
 * Make a release
 
 
 ### Extra Credit
+* Make a sequence diagram of a central part of the program's functionality (making and saving a change?)
 * Generate UML diagram of core classes and embed it into architecture.md in documentation
+
+### Done
+* min 20% test coverage
+* Exclude UI code from test report

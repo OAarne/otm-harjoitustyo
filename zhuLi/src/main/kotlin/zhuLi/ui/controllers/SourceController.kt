@@ -6,7 +6,6 @@ import zhuLi.dao.JsonSourceListDao
 import zhuLi.domain.Source
 import zhuLi.domain.SourceListModel
 import java.io.File
-import java.util.Date
 
 class SourceController() : Controller() {
     //    val sources: FXCollections.observableArrayList<Source>
@@ -14,10 +13,16 @@ class SourceController() : Controller() {
     val listModel: SourceListModel
 
     init {
-        // TODO: pull the path from somewhere
-        var source = Source(1, "Top research", Date(1981, 12, 4), "", "ArXiv")
-        listModel = SourceListModel(JsonSourceListDao(File("sampleSources.json")))
+//        val sourceProperties = Properties()
+//        sourceProperties.load
+        // TODO: pull the path from somewhere, like a config file
+
+        var sourceFile = File("sources.json")
+        sourceFile.createNewFile()
+
+        listModel = SourceListModel(JsonSourceListDao(sourceFile))
         sources = FXCollections.observableArrayList<Source>(listModel.sources)
+//        val resource = this.javaClass.getResourceAsStream("sampleSources.json")
     }
 
     fun addSource(source: Source) {
