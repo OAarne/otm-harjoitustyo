@@ -12,11 +12,7 @@
 	* Possivly just have a field with a path, but that pah can also be relative to some set of directories listed in some config file
 
 #### Other stuff
-* Make a way to generate runnable jar and add it to readme
-* Keep the hours logged
 * Add a more detailed user's manual
-* Make a release
-
 
 ### Extra Credit
 * Make a sequence diagram of a central part of the program's functionality (making and saving a change?)
@@ -25,3 +21,5 @@
 ### Done
 * min 20% test coverage
 * Exclude UI code from test report
+* Keep the hours logged
+* Make a release
