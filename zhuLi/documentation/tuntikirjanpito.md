@@ -15,5 +15,6 @@
 | 17.3 | 3	   | Got loading from JSON to work, refactored tests		 |
 | 23.3 | 5     | Adding, deleting sources and saving changes             |
 | 24.3 | 8     | Misc. BS trying to get a release together, testing, etc |
+| 27.3 | 2     | Code reviewed Ajhaa's project.							 |
 
-__Total hours: 42__
+__Total hours: 44__

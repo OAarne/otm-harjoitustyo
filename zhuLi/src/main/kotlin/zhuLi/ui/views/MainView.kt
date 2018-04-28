@@ -11,12 +11,13 @@ import tornadofx.center
 import tornadofx.column
 import tornadofx.hbox
 import tornadofx.makeEditable
+import tornadofx.right
 import tornadofx.singleAssign
 import tornadofx.smartResize
 import tornadofx.tableview
 import zhuLi.domain.Source
 import zhuLi.ui.controllers.SourceController
-import java.util.Date
+import java.time.LocalDate
 
 class MainView : View("Zhu Li - Digital Research Assistant") {
 
@@ -50,10 +51,13 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
                 button("Save").action(::save)
             }
         }
+        right {
+            add<SourceEditor>()
+        }
     }
 
     private fun addSource() {
-        val newSource = Source(controller.sources.size + 1, "", Date(), "", "")
+        val newSource = Source(controller.sources.size + 1, "", LocalDate.now(), "", "")
         controller.addSource(newSource)
 //        sourceTable.selectionModel.select(newSource)
         sourceTable.selectionModel.select(sourceTable.items.size - 1, sourceTable.columns[1])
@@ -69,7 +73,7 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
 
     init {
 //        controller = SourceController("sources.json")
-        root.setPrefSize(800.0, 600.0)
+        root.setPrefSize(1200.0, 800.0)
     }
     // TODO: Make it save on close?
 }

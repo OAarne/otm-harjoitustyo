@@ -13,6 +13,7 @@ The app allows tracking of sources and associated notes for multiple research pr
 	* publication date
 	* authors
 	* a bibtex reference
+* Editing source data with a form
 
 ### Core
 * Saving sources to JSON file
@@ -21,7 +22,6 @@ The app allows tracking of sources and associated notes for multiple research pr
     * a markdown file for notes on the source
     * source URL
     * date of latest edit (note file or metadata)
-* Editing source data with a form
 
 ### Additional
 * Allow adding tags to sources to indicate which project(s) they are associated with

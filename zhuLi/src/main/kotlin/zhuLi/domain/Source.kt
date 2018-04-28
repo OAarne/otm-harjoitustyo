@@ -6,13 +6,13 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
-import java.util.Date
+import java.time.LocalDate
 
 class Source(
     id: Int,
     title: String,
 //    authors: List<String>,
-    @Json(name = "pub_date") pubDate: Date,
+    @Json(name = "pub_date") pubDate: LocalDate,
     @Json(name = "bibtex") bibTex: String,
     publisher: String
 ) {
@@ -26,11 +26,11 @@ class Source(
 //    val authorsProperty = FXCollections.observableArrayList<String>(authors)
 
     //  TODO: Preferably upgrade to LocalDate, currently downgraded for JSON's sake
-    val pubDateProperty = SimpleObjectProperty<Date>(pubDate)
+    val pubDateProperty = SimpleObjectProperty<LocalDate>(pubDate)
     @Json(name = "pub_date")
     var pubDate by pubDateProperty
 
-    val addDateProperty = SimpleObjectProperty<Date>(Date())
+    val addDateProperty = SimpleObjectProperty<LocalDate>(LocalDate.now())
     @Json(name = "add_date")
     var addDate by addDateProperty
 
