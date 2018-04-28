@@ -7,5 +7,6 @@ zhuLi/build
 *.class
 *.jar
 *.json
+todo
 zhuLi/.gradle
 zhuLi/settings.gradle
