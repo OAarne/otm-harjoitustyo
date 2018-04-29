@@ -20,6 +20,7 @@ class JsonSourceListDao(val file: File) : SourceListDao {
     val moshiSource = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .add(LocalDate::class.java, LocalDateJsonAdapter().nullSafe())
+        .add(File::class.java, FileJsonAdapter())
         .build()
 
     val sourceAdapter = moshiSource.adapter(Source::class.java)
@@ -28,6 +29,7 @@ class JsonSourceListDao(val file: File) : SourceListDao {
         .add(KotlinJsonAdapterFactory())
         .add(Source::class.java, sourceAdapter)
         .add(LocalDate::class.java, LocalDateJsonAdapter().nullSafe())
+        .add(File::class.java, FileJsonAdapter())
         .build()
 
     val listAdapter: JsonAdapter<List<Source>> = moshiList.adapter(listType)
@@ -78,16 +80,14 @@ class LocalDateJsonAdapter() : JsonAdapter<LocalDate>() {
     override fun fromJson(reader: JsonReader?): LocalDate? {
         return LocalDate.parse(reader?.nextString())
     }
+}
 
-//    @ToJson
-//    fun toJson(localDate: LocalDate?): String {
-////        val date = Date.from(value?.atStartOfDay(ZoneId.systemDefault())?.toInstant())
-////        Rfc3339DateJsonAdapter.toJson()
-//        return localDate.toString()
-//    }
-//
-//    @FromJson
-//    fun fromJson(localDate: String): LocalDate? {
-//        return LocalDate.parse(localDate)
-//    }
+class FileJsonAdapter() : JsonAdapter<File>() {
+    override fun fromJson(reader: JsonReader?): File? {
+        return File(reader?.nextString())
+    }
+
+    override fun toJson(writer: JsonWriter?, file: File?) {
+        writer?.value(file?.absolutePath)
+    }
 }

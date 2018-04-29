@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
+import java.io.File
 import java.time.LocalDate
 
 class Source(
@@ -23,6 +24,8 @@ class Source(
     val titleProperty = SimpleStringProperty(title)
     var title by titleProperty
 
+    val fileProperty = SimpleObjectProperty<File>()
+    var file by fileProperty
 //    val authorsProperty = FXCollections.observableArrayList<String>(authors)
 
     //  TODO: Preferably upgrade to LocalDate, currently downgraded for JSON's sake

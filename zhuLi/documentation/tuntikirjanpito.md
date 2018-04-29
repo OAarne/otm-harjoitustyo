@@ -16,5 +16,7 @@
 | 23.3 | 5     | Adding, deleting sources and saving changes             |
 | 24.3 | 8     | Misc. BS trying to get a release together, testing, etc |
 | 27.3 | 2     | Code reviewed Ajhaa's project.							 |
+| 28.3 | 3     | Added form for editing sources							 |
+| 29.3 | 3	   | Made it possible add files to sources and open them     |
 
-__Total hours: 44__
+__Total hours: 50__

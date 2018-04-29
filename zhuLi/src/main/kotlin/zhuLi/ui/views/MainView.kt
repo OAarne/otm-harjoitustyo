@@ -32,12 +32,13 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
 //              TODO: date is shown in american format, this is unacceptable
 //              TODO: implement a way to edit authors
                 column("id", Source::idProperty)
-                column("title", Source::titleProperty).makeEditable()
+                column("Title", Source::titleProperty).makeEditable()
+//                readonlyColumn("File", Source::fileProperty)
 //        readonlyColumn("authors", Source::authorsProperty)
-                column("pub. date", Source::pubDateProperty)//.makeEditable()
+                column("Pub. Date", Source::pubDateProperty)//.makeEditable()
                 column("Date Added", Source::addDateProperty)
                 column("BibTex", Source::bibTexProperty).makeEditable()
-                column("publisher", Source::publisherProperty).makeEditable()
+                column("Publisher", Source::publisherProperty).makeEditable()
                 bindSelected(sourceModel)
                 isEditable = true
                 prefWidth = 800.0
