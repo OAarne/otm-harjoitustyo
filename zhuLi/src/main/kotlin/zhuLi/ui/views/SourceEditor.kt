@@ -1,23 +1,24 @@
 package zhuLi.ui.views
 
-import javafx.beans.property.SimpleObjectProperty
-import javafx.stage.FileChooser
-import tornadofx.FileChooserMode
 import tornadofx.View
 import tornadofx.action
+import tornadofx.bind
 import tornadofx.button
-import tornadofx.chooseFile
 import tornadofx.datepicker
 import tornadofx.field
 import tornadofx.fieldset
 import tornadofx.form
+import tornadofx.hbox
+import tornadofx.label
 import tornadofx.textarea
 import tornadofx.textfield
-import java.awt.Desktop
-import kotlin.concurrent.thread
+import tornadofx.toProperty
+import tornadofx.vbox
+import zhuLi.ui.controllers.SourceController
 
 class SourceEditor : View() {
     private val model: SourceViewModel by inject()
+    private val controller: SourceController by inject()
 
     override val root = form {
         fieldset {
@@ -26,23 +27,16 @@ class SourceEditor : View() {
             }
             field("File") {
                 // TODO: Add some sort of indicator for what file is selected
-                button("Choose File") {
-                    //                model.file.bind(observableFile)
-                    setOnAction {
-                        val fileList = chooseFile("Choose File", arrayOf(FileChooser.ExtensionFilter("documents", listOf("*.pdf", "*.epub"))), FileChooserMode.Single, null, {})
-                        if (fileList.isNotEmpty()) {
-                            var observableFile = SimpleObjectProperty(fileList[0])
-                            model.file.bind(observableFile)
-                        }
+                vbox {
+                    label() {
+                        bind(model.file.toProperty().asString())
                     }
-                }
-                button("Open File") {
-                    setOnAction {
-                        // TODO: I think this counts as logic in the view.
-                        if (Desktop.isDesktopSupported()) {
-                            thread(true, false, null, "zhuLi-viewer", -1, {
-                                Desktop.getDesktop().open(model.file.value)
-                            })
+                    hbox {
+                        button("Choose File") {
+                            action { model.setFile() }
+                        }
+                        button("Open File") {
+                            action { model.openFile() }
                         }
                     }
                 }
@@ -51,7 +45,6 @@ class SourceEditor : View() {
             }
             field("Publication Date") {
                 datepicker(model.pubDate)
-
             }
             field("BibTex") {
                 textarea(model.bibTex)
@@ -60,13 +53,15 @@ class SourceEditor : View() {
             field("publisher") {
                 textfield(model.publisher)
             }
-            button("Save Changes") {
-                action {
-                    model.commit()
+            vbox {
+                button("Save Changes") {
+                    action { model.commit() }
+                }
+                button("Discard Changes") {
+                    action { model.rollback() }
                 }
             }
         }
         this.prefWidth = 350.0
-
     }
 }

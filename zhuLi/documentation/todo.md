@@ -7,12 +7,12 @@ Focus primarily on developing the app until wednesday, which will be dedicated t
 
 #### The actual app
 * Add the rest of the fields:
-	* a file
 	* an editable list of authors
 	* a note file
 	* 
 * Add a config file for setting data and document locations. (see example app)
 * Try to figure out the architechture and package structure better
+	* Maybe just get rid of the controller, and move all the logic into the listmodel?
 * Figure out how to link to local files or something
 	* Possibility: Set a directory (default ~/Documents) from which files are searched recursively
 	* Maybe have a designated file where all the files (or symlinks) are loaded from
