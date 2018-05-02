@@ -19,5 +19,7 @@
 | 28.4 | 3     | Added form for editing sources							 |
 | 29.4 | 4	   | Made it possible add files to sources and open them     |
 | 30.4 | 2     | Cleaned yesterday's code up a bunch                     |
+| 1.5  | 4	   | Tried to implement author list, had trouble with GUI    |
+| 2.5  | 6     | Didn't get authors to work, JSON problem, also docs	 |
 
-__Total hours: 53__
+__Total hours: 63__

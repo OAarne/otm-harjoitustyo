@@ -6,6 +6,7 @@ Focus primarily on developing the app until wednesday, which will be dedicated t
 ### Necessary
 
 #### The actual app
+* Keyboard shortcuts for saving and other common functions.
 * Add the rest of the fields:
 	* an editable list of authors
 	* a note file
@@ -20,11 +21,8 @@ Focus primarily on developing the app until wednesday, which will be dedicated t
 
 #### Other stuff
 * Keep the hours logged __continuously__.
-* Make gradle check pass
-* Actually write an architechture document
 * Write javadocs
-* Get test coverage above 60%
-* Add a more detailed user's manual
+* Add pretty pictures to architecture document (also make architecture pretty-picture worthy)
 * Make README.md nice, compare to example app.
 
 ### Extra Credit
@@ -32,8 +30,12 @@ Focus primarily on developing the app until wednesday, which will be dedicated t
 * Generate UML diagram of core classes and embed it into architecture.md in documentation
 
 ### Done
+* Add a more detailed user's manual
+* Actually write an architechture document
 * min 20% test coverage
 * Exclude UI code from test report
 * Keep the hours logged
 * Make a release
 * Add a form for adding and editing sources (Inc. a date picker?)
+* Make gradle check pass
+* Get test coverage above 60%

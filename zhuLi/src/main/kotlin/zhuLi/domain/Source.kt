@@ -4,6 +4,7 @@ import com.squareup.moshi.Json
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import javafx.collections.FXCollections
 import tornadofx.getValue
 import tornadofx.setValue
 import java.io.File
@@ -24,11 +25,13 @@ class Source(
     val titleProperty = SimpleStringProperty(title)
     var title by titleProperty
 
+    val authorsProperty = FXCollections.observableArrayList<String>(listOf(""))
+//    val authorsProperty = SimpleListProperty<String>(authors.observable())
+//    var authors by authorsProperty
+
     val fileProperty = SimpleObjectProperty<File>()
     var file by fileProperty
-//    val authorsProperty = FXCollections.observableArrayList<String>(authors)
 
-    //  TODO: Preferably upgrade to LocalDate, currently downgraded for JSON's sake
     val pubDateProperty = SimpleObjectProperty<LocalDate>(pubDate)
     @Json(name = "pub_date")
     var pubDate by pubDateProperty

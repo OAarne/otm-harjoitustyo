@@ -1,4 +1,4 @@
-package zhuLi.ui.views
+package zhuLi.ui
 
 import javafx.scene.control.Alert
 import javafx.stage.FileChooser
@@ -10,16 +10,23 @@ import zhuLi.domain.Source
 import java.awt.Desktop
 import kotlin.concurrent.thread
 
+/**
+ * An implementation of the ViewModel from the MVVM pattern, mediates between the Source model and the views.
+ */
+
 class SourceViewModel : ItemViewModel<Source>() {
     val id = bind(Source::idProperty)
     val title = bind(Source::titleProperty)
+    var authors = bind(Source::authorsProperty)
     var file = bind(Source::fileProperty)
     val pubDate = bind(Source::pubDateProperty)
     val addDate = bind(Source::addDateProperty)
     val bibTex = bind(Source::bibTexProperty)
     val publisher = bind(Source::publisherProperty)
 
-    // TODO: Source editing logic goes here?
+    /**
+     * Opens a file explorer window where the user can select a file to be associated with this source.
+     */
 
     fun setFile() {
         val fileList = chooseFile(
@@ -43,21 +50,35 @@ class SourceViewModel : ItemViewModel<Source>() {
         }
     }
 
+    /**
+     * Opens the file associated with this source with the system default app, if possible.
+     */
+
     fun openFile() {
-        if (Desktop.isDesktopSupported()) {
-            thread(true,
-                false,
-                null,
-                "zhuLi-viewer",
-                -1,
-                { Desktop.getDesktop().open(this.file.value) }
-            )
-        } else {
-            alert(
-                Alert.AlertType.WARNING,
-                "Unsupported Action",
-                "Your platform does not support opening files like this."
-            )
+        if (this.file.value == null) alert(Alert.AlertType.WARNING, "No file set", "No file set") else {
+            if (Desktop.isDesktopSupported()) {
+                thread(true,
+                    false,
+                    null,
+                    "zhuLi-viewer",
+                    -1,
+                    { Desktop.getDesktop().open(this.file.value) }
+                )
+            } else {
+                alert(
+                    Alert.AlertType.WARNING,
+                    "Unsupported Action",
+                    "Your platform does not support opening files this way."
+                )
+            }
         }
+    }
+
+    fun addAuthor(name: String) {
+        this.authors.value.add(name)
+    }
+
+    fun removeAuthor(name: String) {
+        this.authors.value.remove(name)
     }
 }
