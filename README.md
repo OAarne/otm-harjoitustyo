@@ -5,11 +5,19 @@
 zhuLi is a digital research assistant, written in Kotlin.
 It can be used to collect and organize sources and research notes.
 
+### Releases
+
+[0.1](https://github.com/OAarne/otm-harjoitustyo/releases/tag/0.1)
+
 ### Documentation
+
+[User's Manual](https://github.com/OAarne/otm-harjoitustyo/blob/master/zhuLi/documentation/manual.md)
 
 [Req. Spec](https://github.com/OAarne/otm-harjoitustyo/blob/master/zhuLi/documentation/requirements.md)
 
-[Työaikakirjanpito](https://github.com/OAarne/otm-harjoitustyo/blob/master/zhuLi/documentation/tuntikirjanpito.md)
+[Architechture Document](https://github.com/OAarne/otm-harjoitustyo/blob/master/zhuLi/documentation/architecture.md)
+
+[Hours](https://github.com/OAarne/otm-harjoitustyo/blob/master/zhuLi/documentation/tuntikirjanpito.md)
 
 ### Usage
 

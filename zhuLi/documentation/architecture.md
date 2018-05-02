@@ -1,7 +1,5 @@
 # Software Architechture of zhuLi
 
-## 
-
 zhuLi uses a three-tier architecture, with a UI layer, A Service/Model layer, and a DAO layer.
 
 The UI layer is driven by the SourceController, which is a questionable decision, and I might just eliminate it/merge with SourceListModel.
