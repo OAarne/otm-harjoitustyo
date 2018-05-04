@@ -1,33 +1,32 @@
 package zhuLi.domain
 
 import com.squareup.moshi.Json
-import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import tornadofx.getValue
+import tornadofx.observable
 import tornadofx.setValue
+import tornadofx.toProperty
 import java.io.File
 import java.time.LocalDate
 
 class Source(
-    id: Int,
     title: String,
-//    authors: List<String>,
+    authors: List<String>,
     @Json(name = "pub_date") pubDate: LocalDate,
     @Json(name = "bibtex") bibTex: String,
     publisher: String
 ) {
 
-    val idProperty = SimpleIntegerProperty(id)
-    var id by idProperty
+    constructor() : this("", listOf(""), LocalDate.now(), "", "")
 
     val titleProperty = SimpleStringProperty(title)
     var title by titleProperty
 
-    val authorsProperty = FXCollections.observableArrayList<String>(listOf(""))
-//    val authorsProperty = SimpleListProperty<String>(authors.observable())
-//    var authors by authorsProperty
+    val authorsProperty = SimpleListProperty<String>(authors.observable())
+    val authors by authorsProperty
 
     val fileProperty = SimpleObjectProperty<File>()
     var file by fileProperty
@@ -52,7 +51,6 @@ class Source(
 
         other as Source
 
-        if (id != other.id) return false
         if (title != other.title) return false
         if (pubDate != other.pubDate) return false
         if (addDate != other.addDate) return false

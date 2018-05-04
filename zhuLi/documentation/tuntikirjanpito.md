@@ -21,5 +21,6 @@
 | 30.4 | 2     | Cleaned yesterday's code up a bunch                     |
 | 1.5  | 4	   | Tried to implement author list, had trouble with GUI    |
 | 2.5  | 6     | Didn't get authors to work, JSON problem, also docs	 |
+| 4.5  | 1     | Got author list to work nicely						     |
 
-__Total hours: 63__
+__Total hours: 64__

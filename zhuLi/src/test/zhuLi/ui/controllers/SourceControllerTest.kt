@@ -11,7 +11,7 @@ class SourceControllerTest {
     @Test
     fun addAndRemoveSourceTest() {
         val controller = SourceController()
-        val testSource = Source(1, "Test Source", LocalDate.of(2010, 10, 10), "some bibtex", "Elsevier")
+        val testSource = Source("Test Source", listOf("Generic MacResearcher"), LocalDate.of(2010, 10, 10), "some bibtex", "Elsevier")
         controller.addSource(testSource)
         assertEquals(testSource, controller.sources.last())
         controller.deleteSource(testSource)

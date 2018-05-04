@@ -17,7 +17,6 @@ import tornadofx.tableview
 import zhuLi.domain.Source
 import zhuLi.ui.SourceViewModel
 import zhuLi.ui.controllers.SourceController
-import java.time.LocalDate
 
 class MainView : View("Zhu Li - Digital Research Assistant") {
 
@@ -31,15 +30,11 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
             tableview(controller.sources) {
                 sourceTable = this
 //              TODO: date is shown in american format, this is unacceptable
-//              TODO: implement a way to edit authors
-                column("id", Source::idProperty)
-                column("Title", Source::titleProperty)//.makeEditable()
-//                readonlyColumn("File", Source::fileProperty)
-//        readonlyColumn("authors", Source::authorsProperty)
-                column("Pub. Date", Source::pubDateProperty)//.makeEditable()
+                column("Title", Source::titleProperty)
+                column("Pub. Date", Source::pubDateProperty)
                 column("Date Added", Source::addDateProperty)
-                column("BibTex", Source::bibTexProperty)//.makeEditable()
-                column("Publisher", Source::publisherProperty)//.makeEditable()
+                column("BibTex", Source::bibTexProperty)
+                column("Publisher", Source::publisherProperty)
                 bindSelected(sourceModel)
                 isEditable = true
                 prefWidth = 800.0
@@ -59,10 +54,9 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
     }
 
     private fun addSource() {
-        val newSource = Source(controller.sources.size + 1, "", LocalDate.now(), "", "")
+        val newSource = Source()
         controller.addSource(newSource)
-//        sourceTable.selectionModel.select(newSource)
-        sourceTable.selectionModel.select(sourceTable.items.size - 1, sourceTable.columns[1])
+        sourceTable.selectionModel.select(newSource)
     }
 
     private fun deleteSource() {
@@ -71,6 +65,7 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
 
     init {
         root.setPrefSize(1200.0, 800.0)
+        sourceTable.selectionModel.select(0)
     }
     // TODO: Make it save on close?
 }

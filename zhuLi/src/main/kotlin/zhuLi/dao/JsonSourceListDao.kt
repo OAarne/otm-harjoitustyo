@@ -18,35 +18,16 @@ class JsonSourceListDao(val file: File) : SourceListDao {
     // TODO: I know this is a mess, the author list isn't currently getting saved so this is a WIP
 
     val listType = Types.newParameterizedType(List::class.java, Source::class.java)
-    val authorListType = Types.newParameterizedType(List::class.java, String::class.java)
-    //
-    val moshiAuthorList = Moshi.Builder()
+
+    val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
-        .build()
-
-    val authorListAdapter: JsonAdapter<List<String>> = moshiAuthorList.adapter(authorListType)
-
-//    val moshiSource = Moshi.Builder()
-//        .add(LocalDate::class.java, LocalDateJsonAdapter().nullSafe())
-//        .add(File::class.java, FileJsonAdapter())
-//        .add(authorListType, authorListAdapter)
-//        .add(KotlinJsonAdapterFactory())
-//        .build()
-
-//    val sourceAdapter = moshiSource.adapter(Source::class.java)
-
-    val moshiList = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-//        .add(Source::class.java, sourceAdapter)
         .add(LocalDate::class.java, LocalDateJsonAdapter().nullSafe())
         .add(File::class.java, FileJsonAdapter())
-//        .add(authorListType, authorListAdapter)
         .build()
 
-    val listAdapter: JsonAdapter<List<Source>> = moshiList.adapter(listType)
+    val listAdapter: JsonAdapter<List<Source>> = moshi.adapter(listType)
 
     init {
-//        generateSampleSources()
         sources = load()
     }
 
@@ -63,14 +44,12 @@ class JsonSourceListDao(val file: File) : SourceListDao {
      * Generates a list of sample sources for testing purposes
      */
 
-    //TODO: make the tests actually use this
-    //TODO: add authors back in once they work
     fun generateSampleSourceList(): List<Source> {
         var testSources = listOf(
-            Source(1, "Top research", LocalDate.of(1981, 12, 4), "", "ArXiv"),
-            Source(2, "Important paper", LocalDate.of(2001, 1, 23), "", "ArXiv"),
-            Source(3, "Pointless publication", LocalDate.of(1989, 5, 23), "", "ArXiv"),
-            Source(4, "Awful article", LocalDate.of(1998, 8, 11), "", "ArXiv")
+            Source("Top research", listOf("Eminent Expert"), LocalDate.of(1981, 12, 4), "", "ArXiv"),
+            Source("Important paper", listOf("Superstar Scientist", "His Sidekick"), LocalDate.of(2001, 1, 23), "", "ArXiv"),
+            Source("Pointless publication", listOf("No-one Cares"), LocalDate.of(1989, 5, 23), "", "ArXiv"),
+            Source("Awful article", listOf(""), LocalDate.of(1998, 8, 11), "", "ArXiv")
         )
 
         return testSources

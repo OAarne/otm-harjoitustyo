@@ -11,6 +11,8 @@ import tornadofx.fieldset
 import tornadofx.form
 import tornadofx.hbox
 import tornadofx.label
+import tornadofx.makeEditable
+import tornadofx.smartResize
 import tornadofx.tableview
 import tornadofx.textarea
 import tornadofx.textfield
@@ -38,13 +40,9 @@ class SourceEditor : View() {
                         }
                     }
                     tableview(model.authors) {
-                        column("Author", String::toProperty)
-//                        cellFormat {
-//                            label(it)
-//                            button("X") {
-//                                action { model.removeAuthor(it) }
-//                            }
-//                        }
+                        column("Right click to remove", String::toProperty).makeEditable()
+                        smartResize()
+                        setOnContextMenuRequested { model.removeAuthor(this.selectionModel.selectedItem) }
                     }
                 }
             }
@@ -71,7 +69,6 @@ class SourceEditor : View() {
             }
             field("BibTex") {
                 textarea(model.bibTex)
-//                textfield(model.bibTex)
             }
             field("publisher") {
                 textfield(model.publisher)

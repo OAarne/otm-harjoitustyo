@@ -8,7 +8,6 @@ Focus primarily on developing the app until wednesday, which will be dedicated t
 #### The actual app
 * Keyboard shortcuts for saving and other common functions.
 * Add the rest of the fields:
-	* an editable list of authors
 	* a note file
 	* 
 * Add a config file for setting data and document locations. (see example app)
@@ -39,3 +38,4 @@ Focus primarily on developing the app until wednesday, which will be dedicated t
 * Add a form for adding and editing sources (Inc. a date picker?)
 * Make gradle check pass
 * Get test coverage above 60%
+* an editable list of authors

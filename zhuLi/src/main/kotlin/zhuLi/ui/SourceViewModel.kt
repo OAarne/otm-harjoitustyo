@@ -15,7 +15,6 @@ import kotlin.concurrent.thread
  */
 
 class SourceViewModel : ItemViewModel<Source>() {
-    val id = bind(Source::idProperty)
     val title = bind(Source::titleProperty)
     var authors = bind(Source::authorsProperty)
     var file = bind(Source::fileProperty)
