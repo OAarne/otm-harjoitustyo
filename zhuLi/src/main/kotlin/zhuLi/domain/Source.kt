@@ -4,11 +4,9 @@ import com.squareup.moshi.Json
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
-import javafx.collections.FXCollections
 import tornadofx.getValue
 import tornadofx.observable
 import tornadofx.setValue
-import tornadofx.toProperty
 import java.io.File
 import java.time.LocalDate
 
@@ -17,15 +15,16 @@ class Source(
     authors: List<String>,
     @Json(name = "pub_date") pubDate: LocalDate,
     @Json(name = "bibtex") bibTex: String,
-    publisher: String
+    publisher: String,
+    publication: String
 ) {
 
-    constructor() : this("", listOf(""), LocalDate.now(), "", "")
+    constructor() : this("", listOf(""), LocalDate.now(), "", "", "")
 
     val titleProperty = SimpleStringProperty(title)
     var title by titleProperty
 
-    val authorsProperty = SimpleListProperty<String>(authors.observable())
+    val authorsProperty = SimpleListProperty<String>(authors.toMutableList().observable())
     val authors by authorsProperty
 
     val fileProperty = SimpleObjectProperty<File>()
@@ -42,6 +41,9 @@ class Source(
     val bibTexProperty = SimpleStringProperty(bibTex)
     var bibTex by bibTexProperty
 
+    val publicationProperty = SimpleStringProperty(publication)
+    var publication by publicationProperty
+
     val publisherProperty = SimpleStringProperty(publisher)
     var publisher by publisherProperty
 
@@ -52,10 +54,12 @@ class Source(
         other as Source
 
         if (title != other.title) return false
+        if (authors.size != other.authors.size) return false
         if (pubDate != other.pubDate) return false
         if (addDate != other.addDate) return false
         if (bibTex != other.bibTex) return false
         if (publisher != other.publisher) return false
+        if (publication != other.publication) return false
 
         return true
     }

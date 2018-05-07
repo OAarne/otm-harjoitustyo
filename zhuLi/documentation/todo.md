@@ -1,28 +1,36 @@
-## Things left to do for week 6 deadline
-
-The plan:
-Focus primarily on developing the app until wednesday, which will be dedicated to testing/documentation etc.
+## Things left to do for the FINAL deadline
 
 ### Necessary
 
 #### The actual app
+* Changes to authors aren't being shown in the main table?
+* Add autogeneration of bibtex and .bib files
+* Add more fields, see competing products
+* Come up logically complex features to add.
 * Keyboard shortcuts for saving and other common functions.
 * Add the rest of the fields:
 	* a note file
-	* 
 * Add a config file for setting data and document locations. (see example app)
 * Try to figure out the architechture and package structure better
-	* Maybe just get rid of the controller, and move all the logic into the listmodel?
 * Figure out how to link to local files or something
 	* Possibility: Set a directory (default ~/Documents) from which files are searched recursively
 	* Maybe have a designated file where all the files (or symlinks) are loaded from
 	* Possivly just have a field with a path, but that pah can also be relative to some set of directories listed in some config file
+* Make the sync the data over the internet (excluding file paths)
 
 #### Other stuff
 * Keep the hours logged __continuously__.
 * Write javadocs
 * Add pretty pictures to architecture document (also make architecture pretty-picture worthy)
 * Make README.md nice, compare to example app.
+* Runnable jar
+
+#### Once the app is done:
+* Clean up any checkstyle errors
+* Remove unnecessary comments from code
+* Update req. spec to reflect final product
+* Make sure documentation etc are >= example app's. 
+* Make final release
 
 ### Extra Credit
 * Make a sequence diagram of a central part of the program's functionality (making and saving a change?)
