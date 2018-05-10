@@ -28,7 +28,6 @@ class JsonSourceListDao(val file: File) : SourceListDao {
     val listAdapter: JsonAdapter<List<Source>> = moshi.adapter(listType)
 
     init {
-        generateSampleSourcesFile()
         sources = load()
     }
 

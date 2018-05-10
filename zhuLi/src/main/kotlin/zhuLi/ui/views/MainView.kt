@@ -31,6 +31,7 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
             tableview(service.sources) {
                 sourceTable = this
 //              TODO: date is shown in american format, this is unacceptable
+                // TODO: Authors list doesn't update with changes properly
                 column("Title", Source::titleProperty)
                 column("Authors", Source::authorsProperty)
                 column("Pub. Date", Source::pubDateProperty)
@@ -47,13 +48,33 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
             hbox {
                 button("Add Source").action(::addSource)
                 button("Delete selected source").action(::deleteSource)
-                button("Save").action { service.save() }
+                button("Save").action(::save)
+                button("Reload").action(::reload)
             }
         }
         right {
             add<SourceEditor>()
         }
-        setOnKeyPressed { event -> if (event.code == KeyCode.S) service.save() }
+        setOnKeyPressed { event ->
+            if (event.code == KeyCode.S) { save() }
+        }
+    }
+
+    init {
+        root.setPrefSize(1200.0, 800.0)
+        sourceTable.selectionModel.select(0)
+    }
+
+    private fun save() {
+        model.commit()
+        service.save()
+        sourceTable.refresh()
+    }
+
+    private fun reload() {
+        model.rollback()
+        service.reload()
+        sourceTable.refresh()
     }
 
     private fun addSource() {
@@ -64,11 +85,6 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
 
     private fun deleteSource() {
         service.deleteSource(sourceTable.selectionModel.selectedItem)
-    }
-
-    init {
-        root.setPrefSize(1200.0, 800.0)
-        sourceTable.selectionModel.select(0)
     }
     // TODO: Make it save on close?
 }

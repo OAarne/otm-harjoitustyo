@@ -19,7 +19,7 @@ class Source(
     publication: String
 ) {
 
-    constructor() : this("", listOf(""), LocalDate.now(), "", "", "")
+    constructor() : this("", listOf(), LocalDate.now(), "", "", "")
 
     val titleProperty = SimpleStringProperty(title)
     var title by titleProperty

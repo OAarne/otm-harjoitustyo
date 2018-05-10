@@ -31,7 +31,7 @@ class SourceListService() : Controller() {
     }
 
     fun reload() {
-        dao.load()
+        sources = FXCollections.observableArrayList(dao.load())
     }
 
     // TODO: something like getByProject should go here?

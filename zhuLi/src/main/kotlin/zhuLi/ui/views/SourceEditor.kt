@@ -1,21 +1,16 @@
 package zhuLi.ui.views
 
-import javafx.scene.control.TableView
 import tornadofx.View
 import tornadofx.action
 import tornadofx.bind
 import tornadofx.button
-import tornadofx.column
 import tornadofx.datepicker
 import tornadofx.field
 import tornadofx.fieldset
 import tornadofx.form
 import tornadofx.hbox
 import tornadofx.label
-import tornadofx.makeEditable
-import tornadofx.singleAssign
-import tornadofx.smartResize
-import tornadofx.tableview
+import tornadofx.listview
 import tornadofx.textarea
 import tornadofx.textfield
 import tornadofx.toProperty
@@ -24,14 +19,13 @@ import zhuLi.ui.SourceViewModel
 
 class SourceEditor : View() {
     private val model: SourceViewModel by inject()
-    private var authorTable: TableView<String> by singleAssign()
 
     override val root = form {
         fieldset {
             field("Title") {
                 textfield(model.title)
             }
-            field("Authors") {
+            field("Authors\n(Right click to delete)") {
                 vbox {
                     textfield {
                         promptText = "Add author"
@@ -40,11 +34,7 @@ class SourceEditor : View() {
                             clear()
                         }
                     }
-                    tableview(model.authors) {
-                        authorTable = this
-                        column("Right click to remove", String::toProperty).makeEditable()
-//                        bindSelected(model.authors)
-                        smartResize()
+                    listview(model.authors) {
                         setOnContextMenuRequested { model.removeAuthor(this.selectionModel.selectedItem) }
                     }
                 }

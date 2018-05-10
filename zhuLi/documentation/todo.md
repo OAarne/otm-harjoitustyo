@@ -11,11 +11,7 @@
 * Add the rest of the fields:
 	* a note file
 * Add a config file for setting data and document locations. (see example app)
-* Try to figure out the architechture and package structure better
-* Figure out how to link to local files or something
-	* Possibility: Set a directory (default ~/Documents) from which files are searched recursively
-	* Maybe have a designated file where all the files (or symlinks) are loaded from
-	* Possivly just have a field with a path, but that pah can also be relative to some set of directories listed in some config file
+* Try to figure out the  package structure better (inc. tests!)
 * Make the sync the data over the internet (excluding file paths)
 
 #### Other stuff
@@ -37,6 +33,7 @@
 * Generate UML diagram of core classes and embed it into architecture.md in documentation
 
 ### Done
+* Figure out how to link to local files or something
 * Add a more detailed user's manual
 * Actually write an architechture document
 * min 20% test coverage
