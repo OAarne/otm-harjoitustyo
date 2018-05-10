@@ -13,13 +13,14 @@ import java.time.LocalDate
 class Source(
     title: String,
     authors: List<String>,
+    type: SourceType,
     @Json(name = "pub_date") pubDate: LocalDate,
     @Json(name = "bibtex") bibTex: String,
     publisher: String,
     publication: String
 ) {
 
-    constructor() : this("", listOf(), LocalDate.now(), "", "", "")
+    constructor() : this("", listOf(), SourceType.MISC, LocalDate.now(), "", "", "")
 
     val titleProperty = SimpleStringProperty(title)
     var title by titleProperty
@@ -29,6 +30,9 @@ class Source(
 
     val fileProperty = SimpleObjectProperty<File>()
     var file by fileProperty
+
+    val typeProperty = SimpleObjectProperty<SourceType>(type)
+    var type by typeProperty
 
     val pubDateProperty = SimpleObjectProperty<LocalDate>(pubDate)
     @Json(name = "pub_date")

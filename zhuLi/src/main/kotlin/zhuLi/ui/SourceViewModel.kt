@@ -18,9 +18,11 @@ class SourceViewModel : ItemViewModel<Source>() {
     val title = bind(Source::titleProperty)
     var authors = bind(Source::authorsProperty)
     var file = bind(Source::fileProperty)
+    var type = bind(Source::typeProperty)
     val pubDate = bind(Source::pubDateProperty)
     val addDate = bind(Source::addDateProperty)
     val bibTex = bind(Source::bibTexProperty)
+    val publication = bind(Source::publicationProperty)
     val publisher = bind(Source::publisherProperty)
 
     /**

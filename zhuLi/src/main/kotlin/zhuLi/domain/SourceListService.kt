@@ -34,5 +34,27 @@ class SourceListService() : Controller() {
         sources = FXCollections.observableArrayList(dao.load())
     }
 
+    fun generateSourceBibTex(source: Source): String {
+        val tag = source.title.toLowerCase()
+        val title = source.title
+        val authors = source.authors.toString().substring(1, source.authors.toString().length - 1)
+        val type = source.type.toBibtex()
+        val date = source.pubDate.year
+        val publisher = source.publisher
+        val publication = source.publication
+
+        var bibtex = """
+            |@$type{ $tag,
+            |        title = "$title",
+            |        author = "$authors",
+            |        year = "$date",
+            |        publisher = "$publisher",
+            |        journaltitle = "$publication",
+            |        booktitle = "$publication"
+            |}
+            """.trimMargin()
+
+        return bibtex
+    }
     // TODO: something like getByProject should go here?
 }

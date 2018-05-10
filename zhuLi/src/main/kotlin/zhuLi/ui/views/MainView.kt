@@ -34,6 +34,7 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
                 // TODO: Authors list doesn't update with changes properly
                 column("Title", Source::titleProperty)
                 column("Authors", Source::authorsProperty)
+                column("Type", Source::typeProperty)
                 column("Pub. Date", Source::pubDateProperty)
                 column("Date Added", Source::addDateProperty)
                 column("Publication", Source::publicationProperty)

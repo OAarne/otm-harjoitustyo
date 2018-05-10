@@ -7,6 +7,7 @@ import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import zhuLi.domain.Source
+import zhuLi.domain.SourceType
 import java.io.File
 import java.io.IOException
 import java.time.LocalDate
@@ -46,10 +47,10 @@ class JsonSourceListDao(val file: File) : SourceListDao {
 
     fun generateSampleSourceList(): List<Source> {
         var testSources = listOf(
-            Source("Top research", listOf("Eminent Expert"), LocalDate.of(1981, 12, 4), "", "ArXiv", "A Journal"),
-            Source("Important paper", listOf("Superstar Scientist", "His Sidekick"), LocalDate.of(2001, 1, 23), "", "ArXiv", "A Journal"),
-            Source("Pointless publication", listOf("No-one Cares"), LocalDate.of(1989, 5, 23), "", "ArXiv", "A Journal"),
-            Source("Awful article", listOf(""), LocalDate.of(1998, 8, 11), "", "ArXiv", "A Journal")
+            Source("Top research", listOf("Eminent Expert"), SourceType.ARTICLE, LocalDate.of(1981, 12, 4), "", "ArXiv", "A Journal"),
+            Source("Important paper", listOf("Superstar Scientist", "His Sidekick"), SourceType.ARTICLE, LocalDate.of(2001, 1, 23), "", "ArXiv", "A Journal"),
+            Source("Pointless publication", listOf("No-one Cares"), SourceType.ARTICLE, LocalDate.of(1989, 5, 23), "", "ArXiv", "A Journal"),
+            Source("Awful article", listOf(""), SourceType.ARTICLE, LocalDate.of(1998, 8, 11), "", "ArXiv", "A Journal")
         )
 
         return testSources
