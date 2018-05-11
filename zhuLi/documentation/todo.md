@@ -12,6 +12,7 @@
 * Runnable jar
 
 #### Once the app is done:
+* Generate javadocs?
 * Clean up any checkstyle errors
 * Remove unnecessary comments from code
 * Update req. spec to reflect final product
