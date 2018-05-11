@@ -6,13 +6,23 @@ import tornadofx.Controller
 import zhuLi.dao.JsonSourceListDao
 import zhuLi.dao.SourceListDao
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.util.Properties
 
-class SourceListService() : Controller() {
+class SourceService : Controller() {
     var sources: ObservableList<Source>
     val dao: SourceListDao
 
     init {
-        var sourceFile = File("sources.json")
+        val properties = Properties()
+        properties.setProperty("sourcePath", "sources.json")
+        try {
+            val inputStream = FileInputStream("config.properties")
+            properties.load(inputStream)
+        } catch (ex: FileNotFoundException) {}
+        val path = properties.getProperty("sourcePath")
+        val sourceFile = File(path)
         sourceFile.createNewFile()
         dao = JsonSourceListDao(sourceFile)
         sources = FXCollections.observableArrayList<Source>(dao.sources)
@@ -34,8 +44,13 @@ class SourceListService() : Controller() {
         sources = FXCollections.observableArrayList(dao.load())
     }
 
+    /**
+     * Generates a basic bibTex entry for the Source. Will likely have to be edited before real-world use.
+     */
+
     fun generateSourceBibTex(source: Source): String {
-        val tag = source.title.toLowerCase()
+
+        val tag = source.title.toLowerCase().split(" ").joinToString("")
         val title = source.title
         val authors = source.authors.toString().substring(1, source.authors.toString().length - 1)
         val type = source.type.toBibtex()
@@ -55,6 +70,13 @@ class SourceListService() : Controller() {
             """.trimMargin()
 
         return bibtex
+    }
+
+    /**
+     * Concatenates the bibtex entries of the sources in the list to be copied into a .bib file
+     */
+    fun generateBibliography(selection: List<Source>): String {
+        return selection.map { source -> source.bibTex }.joinToString("\n\n")
     }
     // TODO: something like getByProject should go here?
 }

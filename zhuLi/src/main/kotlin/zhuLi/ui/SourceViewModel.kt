@@ -21,6 +21,7 @@ class SourceViewModel : ItemViewModel<Source>() {
     var type = bind(Source::typeProperty)
     val pubDate = bind(Source::pubDateProperty)
     val addDate = bind(Source::addDateProperty)
+    val abstract = bind(Source::abstractProperty)
     val bibTex = bind(Source::bibTexProperty)
     val publication = bind(Source::publicationProperty)
     val publisher = bind(Source::publisherProperty)

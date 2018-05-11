@@ -1,4 +1,4 @@
-package zhuLi.ui.views
+package zhuLi.ui
 
 import tornadofx.View
 import tornadofx.action
@@ -16,13 +16,12 @@ import tornadofx.textarea
 import tornadofx.textfield
 import tornadofx.toProperty
 import tornadofx.vbox
-import zhuLi.domain.SourceListService
+import zhuLi.domain.SourceService
 import zhuLi.domain.SourceType
-import zhuLi.ui.SourceViewModel
 
 class SourceEditor : View() {
     private val model: SourceViewModel by inject()
-    private val service: SourceListService by inject()
+    private val service: SourceService by inject()
 
     override val root = form {
         fieldset {
@@ -40,6 +39,7 @@ class SourceEditor : View() {
                     }
                     listview(model.authors) {
                         setOnContextMenuRequested { model.removeAuthor(this.selectionModel.selectedItem) }
+                        prefHeight = 100.0
                     }
                 }
             }
@@ -65,10 +65,17 @@ class SourceEditor : View() {
             field("Publication Date") {
                 datepicker(model.pubDate)
             }
+            field("Abstract") {
+                textarea(model.abstract) {
+                    prefHeight = 150.0
+                }
+            }
             field("BibTex") {
                 vbox {
-                    textarea(model.bibTex)
-                    button("Generate BibTex") {
+                    textarea(model.bibTex) {
+                        prefHeight = 100.0
+                    }
+                    button("Autofill BibTex") {
                         action { model.bibTex.value = service.generateSourceBibTex(model.item) }
                     }
                 }
@@ -76,7 +83,7 @@ class SourceEditor : View() {
             field("Publication") {
                 textfield(model.publication)
             }
-            field("publisher") {
+            field("Publisher") {
                 textfield(model.publisher)
             }
             vbox {

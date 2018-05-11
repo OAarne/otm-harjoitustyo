@@ -7,4 +7,5 @@ interface SourceListDao {
 
     fun load(): List<Source>
     fun save(sources: List<Source>)
+    fun generateSampleSourcesFile()
 }

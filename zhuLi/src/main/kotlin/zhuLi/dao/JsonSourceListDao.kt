@@ -12,6 +12,10 @@ import java.io.File
 import java.io.IOException
 import java.time.LocalDate
 
+/**
+ * A DAO for loading from and saving to a JSON file.
+ */
+
 class JsonSourceListDao(val file: File) : SourceListDao {
 
     override val sources: List<Source>
@@ -36,7 +40,7 @@ class JsonSourceListDao(val file: File) : SourceListDao {
      * Generates a sample sources file for testing purposes.
      */
 
-    fun generateSampleSourcesFile() {
+    override fun generateSampleSourcesFile() {
         val sampleSources = generateSampleSourceList()
         save(sampleSources)
     }
@@ -47,14 +51,50 @@ class JsonSourceListDao(val file: File) : SourceListDao {
 
     fun generateSampleSourceList(): List<Source> {
         var testSources = listOf(
-            Source("Top research", listOf("Eminent Expert"), SourceType.ARTICLE, LocalDate.of(1981, 12, 4), "", "ArXiv", "A Journal"),
-            Source("Important paper", listOf("Superstar Scientist", "His Sidekick"), SourceType.ARTICLE, LocalDate.of(2001, 1, 23), "", "ArXiv", "A Journal"),
-            Source("Pointless publication", listOf("No-one Cares"), SourceType.ARTICLE, LocalDate.of(1989, 5, 23), "", "ArXiv", "A Journal"),
-            Source("Awful article", listOf(""), SourceType.ARTICLE, LocalDate.of(1998, 8, 11), "", "ArXiv", "A Journal")
+            Source("Top research",
+                listOf("Eminent Expert"),
+                SourceType.ARTICLE,
+                LocalDate.of(1981, 12, 4),
+                "five dollar words.",
+                "",
+                "ArXiv",
+                "A Journal"
+            ),
+            Source("Important paper",
+                listOf("Superstar Scientist", "His Sidekick"),
+                SourceType.ARTICLE,
+                LocalDate.of(2001, 1, 23),
+                "",
+                "",
+                "ArXiv",
+                "A Journal"
+            ),
+            Source("Pointless publication",
+                listOf("No-one Cares"),
+                SourceType.ARTICLE,
+                LocalDate.of(1989, 5, 23),
+                "Concrete applications of concrete.",
+                "",
+                "ArXiv",
+                "A Journal"
+            ),
+            Source("Awful article",
+                listOf(""),
+                SourceType.ARTICLE,
+                LocalDate.of(1998, 8, 11),
+                "We only got these results because our methodology was bad, but we won't say that here.",
+                "",
+                "ArXiv",
+                "A Journal"
+            )
         )
 
         return testSources
     }
+
+    /**
+     * Reads a .json file from the path and deserializes it into a List<Source>
+     */
 
     override fun load(): List<Source> {
         try {
@@ -68,6 +108,10 @@ class JsonSourceListDao(val file: File) : SourceListDao {
         }
     }
 
+    /**
+     * Serializes the given list into a JSON array and writes that to the path.
+     */
+
     override fun save(sources: List<Source>) {
         var jsonList = listAdapter.toJson(sources)
         file.printWriter().use { out ->
@@ -75,6 +119,10 @@ class JsonSourceListDao(val file: File) : SourceListDao {
         }
     }
 }
+
+/**
+ * An adapter for moshi, to serialize and deserialize LocalDates correctly.
+ */
 
 class LocalDateJsonAdapter() : JsonAdapter<LocalDate>() {
     override fun toJson(writer: JsonWriter?, localDate: LocalDate?) {
@@ -85,6 +133,10 @@ class LocalDateJsonAdapter() : JsonAdapter<LocalDate>() {
         return LocalDate.parse(reader?.nextString())
     }
 }
+
+/**
+ * An adapter for moshi, to serialize and deserialize Files correctly
+ */
 
 class FileJsonAdapter() : JsonAdapter<File>() {
     override fun fromJson(reader: JsonReader?): File? {

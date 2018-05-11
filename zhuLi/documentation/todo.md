@@ -3,16 +3,16 @@
 ### Necessary
 
 #### The actual app
-* Changes to authors aren't being shown in the main table?
-* Add autogeneration of bibtex and .bib files
+* Display data nicely
+	* Date format
+	* No [] around lists
+	* No properties
 * Add more fields, see competing products
 * Come up logically complex features to add.
 * Keyboard shortcuts for saving and other common functions.
 * Add the rest of the fields:
 	* a note file
-* Add a config file for setting data and document locations. (see example app)
 * Try to figure out the  package structure better (inc. tests!)
-* Make the sync the data over the internet (excluding file paths)
 
 #### Other stuff
 * Keep the hours logged __continuously__.
@@ -33,6 +33,9 @@
 * Generate UML diagram of core classes and embed it into architecture.md in documentation
 
 ### Done
+* Add a dialog for setting data location.
+* Add autogeneration of bibtex and .bib files
+* Changes to authors aren't being shown in the main table?
 * Figure out how to link to local files or something
 * Add a more detailed user's manual
 * Actually write an architechture document

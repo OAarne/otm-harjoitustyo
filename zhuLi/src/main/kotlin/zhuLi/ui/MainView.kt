@@ -1,7 +1,10 @@
-package zhuLi.ui.views
+package zhuLi.ui
 
+import javafx.scene.control.Alert
 import javafx.scene.control.TableView
+import javafx.scene.control.TextArea
 import javafx.scene.input.KeyCode
+import javafx.scene.layout.GridPane
 import tornadofx.View
 import tornadofx.action
 import tornadofx.bindSelected
@@ -11,17 +14,17 @@ import tornadofx.button
 import tornadofx.center
 import tornadofx.column
 import tornadofx.hbox
+import tornadofx.multiSelect
 import tornadofx.right
 import tornadofx.singleAssign
 import tornadofx.smartResize
 import tornadofx.tableview
 import zhuLi.domain.Source
-import zhuLi.domain.SourceListService
-import zhuLi.ui.SourceViewModel
+import zhuLi.domain.SourceService
 
 class MainView : View("Zhu Li - Digital Research Assistant") {
 
-    private val service: SourceListService by inject()
+    private val service: SourceService by inject()
     private val model: SourceViewModel by inject()
     private var sourceTable: TableView<Source> by singleAssign()
 
@@ -40,6 +43,7 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
                 column("Publication", Source::publicationProperty)
                 column("Publisher", Source::publisherProperty)
                 bindSelected(model)
+                multiSelect(true)
                 isEditable = true
                 prefWidth = 800.0
                 smartResize()
@@ -49,6 +53,8 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
             hbox {
                 button("Add Source").action(::addSource)
                 button("Delete selected source").action(::deleteSource)
+                button("Autofill BibTex entries for Selected").action(::autofillBibTex)
+                button("Generate .bib File for Selected").action(::bibFile)
                 button("Save").action(::save)
                 button("Reload").action(::reload)
             }
@@ -57,7 +63,9 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
             add<SourceEditor>()
         }
         setOnKeyPressed { event ->
-            if (event.code == KeyCode.S) { save() }
+            if (event.code == KeyCode.S) {
+                save()
+            }
         }
     }
 
@@ -87,5 +95,33 @@ class MainView : View("Zhu Li - Digital Research Assistant") {
     private fun deleteSource() {
         service.deleteSource(sourceTable.selectionModel.selectedItem)
     }
-    // TODO: Make it save on close?
+
+    /**
+     * Automatically fills the bibTex fields of the currently selected Sources.
+     */
+
+    fun autofillBibTex() {
+        sourceTable.selectionModel.selectedCells.forEach { cell ->
+            val source = service.sources.get(cell.row)
+            source.bibTex = service.generateSourceBibTex(source)
+        }
+    }
+
+    /**
+     * Shows an alert containing an editable textarea
+     * with the bibtex entries of all currently selected Sources collected to be copied into a .bib file.
+     * __Does not actually generate any file!__
+     */
+
+    private fun bibFile() {
+        val pane = GridPane()
+        pane.maxWidth = Double.MAX_VALUE
+        pane.add(TextArea(service.generateBibliography(sourceTable.selectionModel.selectedItems)))
+
+        val alert = Alert(Alert.AlertType.CONFIRMATION)
+        alert.headerText = "Copy this to your .bib file"
+        alert.dialogPane.content = pane
+
+        alert.show()
+    }
 }

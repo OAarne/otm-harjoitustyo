@@ -6,8 +6,9 @@ Unzip the distribution wherever and run `bin/zhuLi`.
 
 ## Using the program
 
-zhuLi will save the source data in a file called sources.json in the directory where it was run.
-The sources will be loaded from there from thereon.
+By default, zhuLi will save the source data in a file called sources.json in the directory where it was run.
+The sources will be loaded from there in the future.
+The path of the .json file can be set by creating a file called `config.properties` in the working directory. The contents of the file should be `sourcePath=<path>`.
 
 The form on the right can be used to edit the selected source.
 New sources can be added by clicking "Add source" at the bottom of the screen.
