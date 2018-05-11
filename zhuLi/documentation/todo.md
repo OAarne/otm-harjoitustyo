@@ -13,8 +13,6 @@
 
 #### Once the app is done:
 * Generate javadocs?
-* Clean up any checkstyle errors
-* Remove unnecessary comments from code
 * Update req. spec to reflect final product
 * Make sure documentation etc are >= example app's. 
 * Make final release
@@ -34,6 +32,8 @@
 * Try to figure out the  package structure better (inc. tests!)
 
 ### Done
+* Remove unnecessary comments from code
+* Clean up any checkstyle errors
 * Add a dialog for setting data location.
 * Add autogeneration of bibtex and .bib files
 * Changes to authors aren't being shown in the main table?

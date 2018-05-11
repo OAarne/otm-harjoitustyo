@@ -15,7 +15,7 @@ class SourceServiceTest {
         val tempConfig = createTempFile("config", ".properties")
         tempConfig.writeText("sourceFile=tmp.json")
 
-        val tempFile = createTempFile("tmp", ".json")
+        createTempFile("tmp", ".json")
         val service = SourceService()
 
         val testSource = Source("Test Source", listOf("Generic MacResearcher"), SourceType.ARTICLE, LocalDate.of(2010, 10, 10), "Concrete applications of concrete", "some bibtex", "Elsevier", "Nature")
