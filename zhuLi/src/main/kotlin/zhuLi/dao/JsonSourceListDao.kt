@@ -9,16 +9,15 @@ import com.squareup.moshi.Types
 import zhuLi.domain.Source
 import zhuLi.domain.SourceType
 import java.io.File
-import java.io.IOException
 import java.time.LocalDate
 
 /**
  * A DAO for loading from and saving to a JSON file.
  */
 
-class JsonSourceListDao(val file: File) : SourceListDao {
+abstract class JsonSourceListDao : SourceListDao {
 
-    override val sources: List<Source>
+    abstract override val sources: List<Source>
 
 // Note to grader: this may look really simple, but getting all of the adapters to work properly was really finicky.
 
@@ -31,10 +30,6 @@ class JsonSourceListDao(val file: File) : SourceListDao {
         .build()
 
     val listAdapter: JsonAdapter<List<Source>> = moshi.adapter(listType)
-
-    init {
-        sources = load()
-    }
 
     /**
      * Generates a sample sources file for testing purposes.
@@ -96,28 +91,13 @@ class JsonSourceListDao(val file: File) : SourceListDao {
      * Reads a .json file from the path and deserializes it into a List<Source>
      */
 
-    override fun load(): List<Source> {
-        try {
-            val jsonList = file.readText()
-
-            val sourceList = listAdapter.fromJson(jsonList)
-
-            return sourceList!!
-        } catch (e: IOException) {
-            return listOf()
-        }
-    }
+    abstract override fun load(): List<Source>
 
     /**
      * Serializes the given list into a JSON array and writes that to the path.
      */
 
-    override fun save(sources: List<Source>) {
-        var jsonList = listAdapter.toJson(sources)
-        file.printWriter().use { out ->
-            out.println(jsonList)
-        }
-    }
+    abstract override fun save(sources: List<Source>)
 }
 
 /**

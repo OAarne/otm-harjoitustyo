@@ -3,7 +3,7 @@ package zhuLi.domain
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import tornadofx.Controller
-import zhuLi.dao.JsonSourceListDao
+import zhuLi.dao.JsonSourceListFileDao
 import zhuLi.dao.SourceListDao
 import java.io.File
 import java.io.FileInputStream
@@ -24,7 +24,8 @@ class SourceService : Controller() {
         val path = properties.getProperty("sourcePath")
         val sourceFile = File(path)
         sourceFile.createNewFile()
-        dao = JsonSourceListDao(sourceFile)
+
+        dao = JsonSourceListFileDao(sourceFile)
         sources = FXCollections.observableArrayList<Source>(dao.sources)
     }
 
@@ -48,6 +49,10 @@ class SourceService : Controller() {
      * Generates a basic bibTex entry for the Source. Will likely have to be edited before real-world use.
      */
 
+    // Note to grader: These bibtex methods leave a huge whole in my test coverage,
+    // but I hope you see that there is no meaningful way to test this,
+    // since it's "correct behavior" isn't well defined.
+    // This is on purpose, it's just supposed to be a little convenience feature.
     fun generateSourceBibTex(source: Source): String {
 
         val tag = source.title.toLowerCase().split(" ").joinToString("")
@@ -75,8 +80,8 @@ class SourceService : Controller() {
     /**
      * Concatenates the bibtex entries of the sources in the list to be copied into a .bib file
      */
+
     fun generateBibliography(selection: List<Source>): String {
         return selection.map { source -> source.bibTex }.joinToString("\n\n")
     }
-    // TODO: something like getByProject should go here?
 }

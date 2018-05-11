@@ -3,16 +3,6 @@
 ### Necessary
 
 #### The actual app
-* Display data nicely
-	* Date format
-	* No [] around lists
-	* No properties
-* Add more fields, see competing products
-* Come up logically complex features to add.
-* Keyboard shortcuts for saving and other common functions.
-* Add the rest of the fields:
-	* a note file
-* Try to figure out the  package structure better (inc. tests!)
 
 #### Other stuff
 * Keep the hours logged __continuously__.
@@ -31,6 +21,16 @@
 ### Extra Credit
 * Make a sequence diagram of a central part of the program's functionality (making and saving a change?)
 * Generate UML diagram of core classes and embed it into architecture.md in documentation
+* Display data nicely
+	* Date format
+	* No [] around lists
+	* No properties
+* Add more fields, see competing products
+* Come up logically complex features to add.
+* Keyboard shortcuts for saving and other common functions.
+* Add the rest of the fields:
+	* a note file
+* Try to figure out the  package structure better (inc. tests!)
 
 ### Done
 * Add a dialog for setting data location.

@@ -1,4 +1,4 @@
-package zhuLi.ui.controllers
+package zhuLi
 
 import org.junit.Test
 import zhuLi.domain.Source

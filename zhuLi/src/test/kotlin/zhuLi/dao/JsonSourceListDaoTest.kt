@@ -13,7 +13,7 @@ class JsonSourceListDaoTest {
     @Test
     fun serializeToJsonAndParse() {
         val tempFile = createTempFile("serializin", ".json")
-        val dao = JsonSourceListDao(tempFile)
+        val dao = JsonSourceListFileDao(tempFile)
 
         val testSources = dao.generateSampleSourceList()
         dao.save(testSources)
@@ -28,7 +28,7 @@ class JsonSourceListDaoTest {
     @Test
     fun parseEmptyFile() {
         val tempFile = createTempFile("empty", ".json")
-        val dao = JsonSourceListDao(tempFile)
+        val dao = JsonSourceListFileDao(tempFile)
 
         val noSources = dao.load()
         val expectedList: List<Source> = listOf()
